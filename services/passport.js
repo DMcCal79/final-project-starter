@@ -9,7 +9,7 @@ const signinStrategy = new LocalStrategy(function(username, password, done) {
   User.findOne({ username: username }).exec()
     .then(user => {
       //If no user is found call done with a 'null' argument meaning no error
-      //and 'false' meaning that the sigin failed
+      //and 'false' meaning that the signin failed
       if (!user) {
         return done(null, false);
       }
@@ -25,7 +25,7 @@ const signinStrategy = new LocalStrategy(function(username, password, done) {
       if (!isMatch) {
         return done(null, false);
       }
-      //If no errors and the passwors match
+      //If no errors and the passwords match
       //call done with a 'null' argument meaning no error
       //and with the now signed in user
       return done(null, user);
@@ -41,9 +41,9 @@ const jwtOptions = {
   //Tell our strategy where to find the token in the request
   jwtFromRequest: ExtractJwt.fromHeader('authorization')
 };
-
-//Create JWT strategy
-//This will decode our token to extract the information stored in it
+//
+// //Create JWT strategy
+// //This will decode our token to extract the information stored in it
 const authStrategy = new JwtStrategy(jwtOptions, function(payload, done) {
   User.findById(payload.userId, function(err, user) {
   if (err) { return done(err, false); }

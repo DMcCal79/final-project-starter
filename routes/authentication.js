@@ -5,7 +5,7 @@ const User = require('../models/UserModel');
 const bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 
-//Require our custom strategies
+// Require our custom strategies
 require('../services/passport');
 
 const signinStrategy = passport.authenticate('signinStrategy', { session: false });
@@ -27,7 +27,7 @@ router.post('/signup', function (req, res, next) {
   //If no username or password was entered then return an error
   if (!username || !password) {
     return res.status(422)
-      .json({ error: 'You must provide an username and password' });
+      res.json({ error: 'You must provide an username and password' });
   }
 
   //Check for a user with the current user name
